@@ -14,13 +14,18 @@ function displayResults(responseJson) {
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
     console.log(responseJson);
-    let printString = `<p>Found ${responseJson.numFound} results</p>`;
+    let printString = `<p>Total of ${responseJson.numFound} Results Found</p>`;
     // iterate through the data array
-    alert(responseJson.docs.size());
-    for (let i = 0; i < responseJson.docs.size(); i++) {
-        printString += `<li><img src=\"http://covers.openlibrary.org/b/oclc/${responseJson.docs[i].oclc}-S.jpg\" />
-                        <p> Title: ${responseJson.docs[i].title}</p></li > `;
-    };
+    for (let i = 0; i < responseJson.docs.length; i++) {
+        printString += '<li><p class="search-results-book-details">';
+        // if we have a valid OCLC, include the book cover
+        if (responseJson.docs[i].oclc != undefined) {
+            printString += `<img src = \"http://covers.openlibrary.org/b/oclc/${responseJson.docs[i].oclc}-S.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+        }
+        printString += `Title: ${responseJson.docs[i].title}<br>
+                        Author: ${responseJson.docs[i].author_name}<br>
+                        Publisher: ${responseJson.docs[i].publisher}</p></li>`;
+    }
     $('#js-book-search-results-list').append(printString);
     //display the results section  
     $('#js-book-search-results-list').removeClass('hidden');

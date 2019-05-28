@@ -9,3 +9,12 @@ body {
 .hidden {
   display: none;
 }
+
+.book-cover-thumbnail {
+  float: right;
+  margin: 5px;
+}
+
+#js-book-search-results-list li {
+  clear: right;
+}
