@@ -18,9 +18,9 @@ function displayResults(responseJson) {
     // iterate through the data array
     for (let i = 0; i < responseJson.docs.length; i++) {
         printString += '<li><p class="search-results-book-details">';
-        // if we have a valid OCLC, include the book cover
-        if (responseJson.docs[i].cover_i != undefined) {
-            printString += `<img src = \"http://covers.openlibrary.org/b/id/${responseJson.docs[i].cover_i}-S.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+        // if we have a valid ISBN, try to include the book cover
+        if (responseJson.docs[i].isbn != undefined) {
+            printString += `<img src = \"http://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
         }
         if (responseJson.docs[i].title != undefined) {
             printString += `Title: ${responseJson.docs[i].title}<br>`;
@@ -32,10 +32,13 @@ function displayResults(responseJson) {
             printString += `Edition: ${responseJson.docs[i].edition_count}<br>`;
         }
         if (responseJson.docs[i].publisher != undefined) {
-            printString += `Publisher: ${responseJson.docs[i].publisher}<br>`;
+            printString += `Publisher: ${responseJson.docs[i].publisher[responseJson.docs[i].publisher.length-1]}<br>`;
+        }
+        if (responseJson.docs[i].publish_year != undefined) {
+            printString += `Year Published: ${responseJson.docs[i].publish_year[responseJson.docs[i].publish_year.length-1]}<br>`;
         }
         if (responseJson.docs[i].isbn != undefined) {
-            printString += `ISBN(s): ${responseJson.docs[i].isbn}<br>`;
+            printString += `ISBN: ${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}<br>`;
         }
         printString += '</p></li>';
     }
@@ -60,7 +63,7 @@ function getBookResults(searchTitle, searchAuthor) {
         })
         .then(responseJson => displayResults(responseJson))
         .catch(err => {
-            $('#js-error-message').text(`Something went wrong: $ {err.message}`);
+            $('#js-error-message').text(`Error: ${err}`);
         });
 
 }
