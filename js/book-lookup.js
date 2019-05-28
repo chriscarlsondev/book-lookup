@@ -1,6 +1,6 @@
 'use strict';
 
-// put your own value below!
+// URL for Open Library's Search API
 const openLibrarySearchURL = 'http://openlibrary.org/search.json';
 
 
