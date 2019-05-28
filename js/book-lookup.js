@@ -3,6 +3,8 @@
 // URL for Open Library's Search API
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
 const openLibraryBookURL = 'https://openlibrary.org/api/books.json';
+const youTubeSearchURL = 'https://www.googleapis.com/youtube/v3/search';
+const youTubeAPIKey = 'AIzaSyA8o52Ezwnbu044lmnY4QiTool7CqtaSRg';
 
 // function convert our parameters into a valid query string
 function formatQueryParams(params) {
@@ -15,11 +17,11 @@ function formatQueryParams(params) {
 function displayBookSearchResults(responseJson) {
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
+    $('#js-related-videos').empty();
 
     // make sure that Book Details are hidden
     $('#js-book-details').addClass('hidden');
 
-    console.log(responseJson);
     let totalValidResults = 0;
     let printString = '';
     // iterate through the data array
@@ -100,14 +102,49 @@ function performBookDetails(ISBN) {
         });
 }
 
+function displayRelatedVideos(responseJson) {
+    $('#js-related-videos').empty();
+    let relatedVideosString = '<h3>Related Videos</h3>';
+    // iterate through the items array
+    for (let i = 0; i < responseJson.items.length; i++) {
+        // for each video object in the items 
+        //array, add a list item to the results 
+        //list with the video title, description,
+        //and thumbnail
+        relatedVideosString += `<iframe width=\"500\" height=\"300\" src=\"https://www.youtube.com/embed/${responseJson.items[i].id.videoId}?controls=1&modestbranding=1&showinfo=0\" frameborder=\"0\" allow=\"accelerometer; encrypted-media; gyroscope;\" allowfullscreen></iframe>`;
+    }
+    $('#js-related-videos').append(relatedVideosString);
+}
+
+function getYouTubeVideos(query) {
+    const params = {
+        key: youTubeAPIKey,
+        q: query,
+        part: 'snippet',
+        maxResults: 5
+    };
+    const queryString = formatQueryParams(params);
+    const url = youTubeSearchURL + '?' + queryString;
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(responseJson => displayRelatedVideos(responseJson))
+        .catch(err => {
+            $('#js-error-message').text(`Something went wrong: ${err.message}`);
+        });
+}
+
 function displayBookDetails(responseJson) {
-    console.log(responseJson);
     // hide search results section
     $('#js-book-search-results').addClass('hidden');
 
     // if there are previous book details displayed, remove them
     $('#js-book-details').empty();
-    let printString = '';
+    let bookDetailsString = '';
     let bookTitle = '';
     // if there is a subtitle, include the subtitle as part of the title
     if ("subtitle" in responseJson.docs[0]) {
@@ -115,21 +152,31 @@ function displayBookDetails(responseJson) {
     } else {
         bookTitle = responseJson.docs[0].title;
     }
-
-    let bookAuthor = responseJson.docs[0].author_name;
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[responseJson.docs[0].isbn.length-1]}-L.jpg`;
-    let bookEdition = responseJson.docs[0].edition_count;
-    let bookPublisher = responseJson.docs[0].publisher[responseJson.docs[0].publisher.length - 1];
-    let bookYearPublished = responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1];
-    let bookISBN = responseJson.docs[0].isbn[0];
-    printString += `<h1> ${bookTitle} </h1><img src=\"${bookCoverURL}\" class=\"book-cover-large\">`;
-    printString += `<p>Book Author: ${bookAuthor}<br>
-    Edition: ${bookEdition}<br>
-    Publisher: ${bookPublisher}<br>
-    Year Published: ${bookYearPublished}</p>`;
-    $('#js-book-details').append(printString);
+    bookDetailsString += `<h2> ${bookTitle} </h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h3>Book Details</h3>`;
+    if ("author_name" in responseJson.docs[0]) {
+        bookDetailsString += `Author: ${responseJson.docs[0].author_name}<br>`;
+    }
+    if ("edition_count" in responseJson.docs[0]) {
+        bookDetailsString += `Edition: ${responseJson.docs[0].edition_count}<br>`;
+    }
+    if ("publisher" in responseJson.docs[0]) {
+        bookDetailsString += `Publisher: ${responseJson.docs[0].publisher[responseJson.docs[0].publisher.length - 1]}<br>`;
+    }
+    if ("publish_year" in responseJson.docs[0]) {
+        bookDetailsString += `Year Published: ${responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1]}<br>`;
+    }
+    if ("isbn" in responseJson.docs[0]) {
+        bookDetailsString += `ISBN: ${responseJson.docs[0].isbn[responseJson.docs[0].isbn.length - 1]}<br>`;
+    }
+    $('#js-book-details').append(bookDetailsString);
     // display book details section
     $('#js-book-details').removeClass('hidden');
+
+    let query = bookTitle + " book " + responseJson.docs[0].author_name;
+
+    getYouTubeVideos(query);
+    $('#js-related-videos').removeClass('hidden');
 }
 
 // call appropriate functions based on interactions
