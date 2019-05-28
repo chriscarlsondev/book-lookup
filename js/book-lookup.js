@@ -13,6 +13,10 @@ function formatQueryParams(params) {
 function displayResults(responseJson) {
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
+
+    // make sure that Book Details are hidden
+    $('#js-book-details').addClass('hidden');
+
     console.log(responseJson);
     let printString = `<p>Total of ${responseJson.numFound} Results Found</p>`;
     // iterate through the data array
