@@ -26,7 +26,7 @@ function displayResults(responseJson) {
         if (responseJson.docs[i].isbn != undefined) {
             printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
         }
-        if (responseJson.docs[i].title != undefined && responseJson.docs[i].isbn != undefined) {
+        if (responseJson.docs[i].title != undefined) {
             printString += `Title: <a href=\"#\" id=\"` + i + `\">${responseJson.docs[i].title}</a><br>`;
         }
         if (responseJson.docs[i].author_name != undefined) {
