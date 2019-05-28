@@ -19,7 +19,6 @@ body {
 .book-cover-large {
   float: right;
   margin: 5px;
-  width: 300px;
 }
 
 #js-book-details {
