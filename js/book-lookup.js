@@ -19,12 +19,25 @@ function displayResults(responseJson) {
     for (let i = 0; i < responseJson.docs.length; i++) {
         printString += '<li><p class="search-results-book-details">';
         // if we have a valid OCLC, include the book cover
-        if (responseJson.docs[i].oclc != undefined) {
-            printString += `<img src = \"http://covers.openlibrary.org/b/oclc/${responseJson.docs[i].oclc}-S.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+        if (responseJson.docs[i].cover_i != undefined) {
+            printString += `<img src = \"http://covers.openlibrary.org/b/id/${responseJson.docs[i].cover_i}-S.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
         }
-        printString += `Title: ${responseJson.docs[i].title}<br>
-                        Author: ${responseJson.docs[i].author_name}<br>
-                        Publisher: ${responseJson.docs[i].publisher}</p></li>`;
+        if (responseJson.docs[i].title != undefined) {
+            printString += `Title: ${responseJson.docs[i].title}<br>`;
+        }
+        if (responseJson.docs[i].author_name != undefined) {
+            printString += `Author: ${responseJson.docs[i].author_name}<br>`;
+        }
+        if (responseJson.docs[i].publish_year != undefined) {
+            printString += `Edition: ${responseJson.docs[i].edition_count}<br>`;
+        }
+        if (responseJson.docs[i].publisher != undefined) {
+            printString += `Publisher: ${responseJson.docs[i].publisher}<br>`;
+        }
+        if (responseJson.docs[i].isbn != undefined) {
+            printString += `ISBN(s): ${responseJson.docs[i].isbn}<br>`;
+        }
+        printString += '</p></li>';
     }
     $('#js-book-search-results-list').append(printString);
     //display the results section  
