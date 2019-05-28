@@ -4,7 +4,7 @@
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
 const openLibraryBookURL = 'https://openlibrary.org/api/books.json';
 const youTubeSearchURL = 'https://www.googleapis.com/youtube/v3/search';
-const youTubeAPIKey = 'AIzaSyA8o52Ezwnbu044lmnY4QiTool7CqtaSRg';
+const youTubeAPIKey = '';
 
 // function convert our parameters into a valid query string
 function formatQueryParams(params) {
