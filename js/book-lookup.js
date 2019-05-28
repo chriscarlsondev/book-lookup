@@ -2,7 +2,6 @@
 
 // URL for Open Library's Search API
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
-const openLibraryBookURL = 'https://openlibrary.org/api/books.json';
 const youTubeSearchURL = 'https://www.googleapis.com/youtube/v3/search';
 const youTubeAPIKey = '';
 
