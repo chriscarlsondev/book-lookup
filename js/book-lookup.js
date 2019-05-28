@@ -3,7 +3,7 @@
 // URL for Open Library's Search API
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
 const youTubeSearchURL = 'https://www.googleapis.com/youtube/v3/search';
-const youTubeAPIKey = '';
+let youTubeAPIKey = '';
 
 // function convert our parameters into a valid query string
 function formatQueryParams(params) {
@@ -184,6 +184,7 @@ function watchPage() {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
         const searchAuthor = $('#js-book-author').val();
+        youTubeAPIKey = $('#js-youtube-api-key').val();
         performBookSearch(searchTitle, searchAuthor);
     });
     $('#js-book-search-results-list').on('click', 'a', function () {
