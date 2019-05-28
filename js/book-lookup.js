@@ -3,13 +3,14 @@
 // URL for Open Library's Search API
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
 
-
+// function convert our parameters into a valid query string
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&');
 }
 
+// function to display all of the search results returned in the JSON object
 function displayResults(responseJson) {
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
@@ -51,7 +52,7 @@ function displayResults(responseJson) {
     $('#js-book-search-results').removeClass('hidden');
 };
 
-/* function to display book search results and selection screen */
+// function to display book search results and selection screen
 function displayBookResults(searchTitle, searchAuthor) {
     const params = {
         author: searchAuthor,
@@ -73,7 +74,7 @@ function displayBookResults(searchTitle, searchAuthor) {
 
 }
 
-/* function to display book details screen */
+// function to display book details screen
 function displayBookDetails(id) {
     // hide search results section
     $('#js-book-search-results').addClass('hidden');
@@ -93,7 +94,8 @@ function displayBookDetails(id) {
     $('#js-book-details').removeClass('hidden');
 }
 
-function watchForm() {
+// call appropriate functions based on interactions
+function watchPage() {
     $('form').submit(event => {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
@@ -106,4 +108,5 @@ function watchForm() {
     });
 }
 
-$(watchForm);
+// call the watchPage function after the page is done loading
+$(watchPage);
