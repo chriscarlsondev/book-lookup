@@ -24,7 +24,7 @@ function displayResults(responseJson) {
         printString += '<li><p class="search-results-book-details">';
         // if we have a valid ISBN, try to include the book cover
         if (responseJson.docs[i].isbn != undefined) {
-            printString += `<img src = \"http://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+            printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
         }
         if (responseJson.docs[i].title != undefined && responseJson.docs[i].isbn != undefined) {
             printString += `Title: <a href=\"#\" id=\"` + i + `\">${responseJson.docs[i].title}</a><br>`;
