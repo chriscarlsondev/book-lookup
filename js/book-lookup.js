@@ -1,7 +1,7 @@
 'use strict';
 
 // URL for Open Library's Search API
-const openLibrarySearchURL = 'http://openlibrary.org/search.json';
+const openLibrarySearchURL = 'https://openlibrary.org/search.json';
 
 
 function formatQueryParams(params) {
