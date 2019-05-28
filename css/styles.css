@@ -16,8 +16,18 @@ body {
   width: 75px;
 }
 
+.book-cover-large {
+  float: right;
+  margin: 5px;
+  width: 300px;
+}
+
+#js-book-details {
+  max-width: 800px;
+}
+
 #js-book-search-results {
-  max-width: 600px;
+  max-width: 800px;
 }
 
 #js-book-search-results-list li {

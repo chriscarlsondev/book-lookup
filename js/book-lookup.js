@@ -1,7 +1,7 @@
 'use strict';
 
 // put your own value below!
-const openLibraryURL = 'http://openlibrary.org/search.json';
+const openLibrarySearchURL = 'http://openlibrary.org/search.json';
 
 
 function formatQueryParams(params) {
@@ -22,8 +22,8 @@ function displayResults(responseJson) {
         if (responseJson.docs[i].isbn != undefined) {
             printString += `<img src = \"http://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[responseJson.docs[i].isbn.length-1]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
         }
-        if (responseJson.docs[i].title != undefined) {
-            printString += `Title: ${responseJson.docs[i].title}<br>`;
+        if (responseJson.docs[i].title != undefined && responseJson.docs[i].isbn != undefined) {
+            printString += `Title: <a href=\"#\" id=\"` + i + `\">${responseJson.docs[i].title}</a><br>`;
         }
         if (responseJson.docs[i].author_name != undefined) {
             printString += `Author: ${responseJson.docs[i].author_name}<br>`;
@@ -44,16 +44,17 @@ function displayResults(responseJson) {
     }
     $('#js-book-search-results-list').append(printString);
     //display the results section  
-    $('#js-book-search-results-list').removeClass('hidden');
+    $('#js-book-search-results').removeClass('hidden');
 };
 
-function getBookResults(searchTitle, searchAuthor) {
+/* function to display book search results and selection screen */
+function displayBookResults(searchTitle, searchAuthor) {
     const params = {
         author: searchAuthor,
         title: searchTitle
     };
     const queryString = formatQueryParams(params);
-    const url = openLibraryURL + '?' + queryString;
+    const url = openLibrarySearchURL + '?' + queryString;
     fetch(url)
         .then(response => {
             if (response.ok) {
@@ -68,12 +69,36 @@ function getBookResults(searchTitle, searchAuthor) {
 
 }
 
+/* function to display book details screen */
+function displayBookDetails(id) {
+    // hide search results section
+    $('#js-book-search-results').addClass('hidden');
+
+    // if there are previous book details displayed, remove them
+    $('#js-book-details').empty();
+
+    let printString = '';
+    let bookTitle = 'Example Title';
+    let bookISBN = '9781101196311';
+    printString += `<h1>${bookTitle}</h1>`;
+    printString += `<img src = \"http://covers.openlibrary.org/b/isbn/${bookISBN}-L.jpg\" alt="Cover of ${bookTitle}" class="book-cover-large">`;
+    printString += `<p>IBSN: ${bookISBN}</p>`;
+
+    $('#js-book-details').append(printString);
+    // display book details section
+    $('#js-book-details').removeClass('hidden');
+}
+
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
         const searchAuthor = $('#js-book-author').val();
-        getBookResults(searchTitle, searchAuthor);
+        displayBookResults(searchTitle, searchAuthor);
+    });
+    $('#js-book-search-results-list').on('click', 'a', function () {
+        event.preventDefault();
+        displayBookDetails($(this).attr('id'));
     });
 }
 
