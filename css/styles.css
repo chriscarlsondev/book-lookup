@@ -8,7 +8,7 @@
 
 header {
   clear: both;
-  margin: 10px auto;
+  margin: 20px auto;
   max-width: 1000px;
 }
 
@@ -32,7 +32,8 @@ h1 {
 
 .logo {
   width: 100px;
-  float: right;
+  float: left;
+  margin: 0 10px 0 0;
 }
 
 h1 a {
