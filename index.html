@@ -12,15 +12,17 @@
 </head>
 
 <body>
-    <div class="container">
+    <header>
         <h1><a href="index.html">Book Lookup</a></h1>
+    </header>
+    <main>
         <p id="js-error-message" class="error-message"></p>
         <form id="js-search-form">
             <label for="book-title">Book Title*</label>
             <input type="text" name="book-title" id="js-book-title" required>
             <label for="book-author">Book Author</label>
             <input type="text" name="book-author" id="js-book-author">
-            <input type="submit" value="Search">
+            <button class="form-buttons" id="btn-search" type="button">Search</button>
         </form>
         <section id="js-book-search-results" class="hidden">
             <ol id="js-book-search-results-list">
@@ -28,7 +30,10 @@
         </section>
         <section class="book-details" id="js-book-details" class="hidden">
         </section>
-    </div>
+        <form id="js-back-to-results" class="hidden">
+            <button class="form-buttons" id="btn-back-to-results" type="button">Back to Search Results</button>
+        </form>
+    </main>
     <script src="./js/book-lookup.js"></script>
 </body>
 
