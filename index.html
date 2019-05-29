@@ -8,7 +8,7 @@
     <title>Book Lookup</title>
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:900|Roboto:900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
@@ -16,23 +16,22 @@
 <body>
     <header>
         <h1><a href="index.html">Book Lookup</a></h1>
+    </header>
+    <main>
         <form id="js-search-form" class="search-form">
-            <label for="js-book-title">Book Title:</label>
-            <input type="text" name="book-title" id="js-book-title" required>
+            <label for="js-book-title" id="js-book-title-label">Book Title:</label>
+            <input type="text" name="book-title" id="js-book-title" autofocus required>
             <label for="js-book-author">Book Author: <span class="gray">(optional)</span></label>
             <input type="text" name="book-author" id="js-book-author">
             <button class="form-buttons" id="btn-search" type="button">Search</button>
         </form>
-    </header>
-    <main>
-
-        <section id="js-error-message">
-            <p id="js-error-message-text" class="error-message"></p>
+        <section id="js-error-message " class="error-message hidden">
+            <p id="js-error-message-text" class="error-message-text"></p>
         </section>
         <section id="js-book-search-results" class="book-search-results hidden">
-            <ol id="js-book-search-results-list"></ol>
+            <ol id="js-book-search-results-list" class="book-search-results-list"></ol>
         </section>
-        <section class="book-details" id="js-book-details" class="hidden">
+        <section class="book-details hidden" id="js-book-details">
         </section>
         <form id="js-back-to-results" class="back-to-results hidden">
             <button class="form-buttons" id="btn-back-to-results" type="button">Back to Search Results</button>

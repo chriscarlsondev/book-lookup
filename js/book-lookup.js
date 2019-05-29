@@ -21,7 +21,7 @@ function displayBookSearchResults(responseJson) {
     $('#js-back-to-results').addClass('hidden');
 
     let totalValidResults = 0;
-    let printString = '';
+    let printString = '<h2>Search Results</h2>';
     // iterate through the data array
     if (responseJson.numFound == 0) {
         $('#js-error-message-text').text('No results found.');
@@ -67,7 +67,7 @@ function performBookSearch(searchTitle, searchAuthor) {
         })
         .then(responseJson => displayBookSearchResults(responseJson))
         .catch(err => {
-            $('#js-error-message-text').text(`Error: ${err}`);
+            $('#js-error-message-text').text(`${err}`);
         });
 }
 
@@ -87,7 +87,7 @@ function getBookDetails(ISBN) {
         })
         .then(responseJson => displayBookDetails(responseJson))
         .catch(err => {
-            $('#js-error-message-text').text(`Error: ${err}`);
+            $('#js-error-message-text').text(`${err}`);
         });
 }
 
@@ -105,23 +105,24 @@ function displayBookDetails(responseJson) {
         bookTitle = responseJson.docs[0].title;
     }
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[0]}-L.jpg`;
-    bookDetailsString += `<h2> ${bookTitle} </h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h3>Book Details</h3>`;
+    bookDetailsString += `<h2>Book Details</h2><h3> ${bookTitle} </h3><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><ul class=\"book-details\">`;
     if ("author_name" in responseJson.docs[0]) {
-        bookDetailsString += `Author(s): ${responseJson.docs[0].author_name}<br>`;
+        bookDetailsString += `<li>Author(s): ${responseJson.docs[0].author_name}</li>`;
     }
     if ("publisher" in responseJson.docs[0]) {
-        bookDetailsString += `Publisher: ${responseJson.docs[0].publisher[0]}<br>`;
+        bookDetailsString += `<li>Publisher: ${responseJson.docs[0].publisher[0]}</li>`;
     }
     if ("publish_year" in responseJson.docs[0]) {
-        bookDetailsString += `Most Recent Year Published: ${responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1]}<br>`;
+        bookDetailsString += `<li>Most Recent Year Published: ${responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1]}</li>`;
 
     }
     if ("first_publish_year" in responseJson.docs[0]) {
-        bookDetailsString += `First Year Published: ${responseJson.docs[0].first_publish_year}<br>`;
+        bookDetailsString += `<li>First Year Published: ${responseJson.docs[0].first_publish_year}</li>`;
     }
     if ("isbn" in responseJson.docs[0]) {
-        bookDetailsString += `ISBN: ${responseJson.docs[0].isbn[0]}<br>`;
+        bookDetailsString += `<li>ISBN: ${responseJson.docs[0].isbn[0]}</li>`;
     }
+    bookDetailsString += "</ul>";
     $('#js-book-details').append(bookDetailsString);
     // display book details section
     $('#js-book-details').removeClass('hidden');
@@ -139,7 +140,13 @@ function watchPage() {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
         const searchAuthor = $('#js-book-author').val();
-        performBookSearch(searchTitle, searchAuthor);
+        if (searchTitle != "") {
+            $('#js-book-title-label').removeClass("red");
+            performBookSearch(searchTitle, searchAuthor);
+        } else {
+            $('#js-book-title-label').addClass("red");
+            $('#js-error-message-text').text(`Please enter a title.`);
+        }
     });
     $('#js-book-search-results-list').on('click', 'a', function () {
         event.preventDefault();
