@@ -2,8 +2,6 @@
 
 // URL for Open Library's Search API
 const openLibrarySearchURL = 'https://openlibrary.org/search.json';
-const youTubeSearchURL = 'https://www.googleapis.com/youtube/v3/search';
-let youTubeAPIKey = '';
 
 // function convert our parameters into a valid query string
 function formatQueryParams(params) {
@@ -101,42 +99,6 @@ function performBookDetails(ISBN) {
         });
 }
 
-function displayRelatedVideos(responseJson) {
-    $('#js-related-videos').empty();
-    let relatedVideosString = '<h3>Related Videos</h3>';
-    // iterate through the items array
-    for (let i = 0; i < responseJson.items.length; i++) {
-        // for each video object in the items 
-        //array, add a list item to the results 
-        //list with the video title, description,
-        //and thumbnail
-        relatedVideosString += `<iframe width=\"500\" height=\"300\" src=\"https://www.youtube.com/embed/${responseJson.items[i].id.videoId}?controls=1&modestbranding=1&showinfo=0\" frameborder=\"0\" allow=\"accelerometer; encrypted-media; gyroscope;\" allowfullscreen></iframe>`;
-    }
-    $('#js-related-videos').append(relatedVideosString);
-}
-
-function getYouTubeVideos(query) {
-    const params = {
-        key: youTubeAPIKey,
-        q: query,
-        part: 'snippet',
-        maxResults: 5
-    };
-    const queryString = formatQueryParams(params);
-    const url = youTubeSearchURL + '?' + queryString;
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-        .then(responseJson => displayRelatedVideos(responseJson))
-        .catch(err => {
-            $('#js-error-message').text(`Something went wrong: ${err.message}`);
-        });
-}
-
 function displayBookDetails(responseJson) {
     // hide search results section
     $('#js-book-search-results').addClass('hidden');
@@ -171,11 +133,6 @@ function displayBookDetails(responseJson) {
     $('#js-book-details').append(bookDetailsString);
     // display book details section
     $('#js-book-details').removeClass('hidden');
-
-    let query = bookTitle + " book " + responseJson.docs[0].author_name;
-
-    getYouTubeVideos(query);
-    $('#js-related-videos').removeClass('hidden');
 }
 
 // call appropriate functions based on interactions
@@ -184,7 +141,6 @@ function watchPage() {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
         const searchAuthor = $('#js-book-author').val();
-        youTubeAPIKey = $('#js-youtube-api-key').val();
         performBookSearch(searchTitle, searchAuthor);
     });
     $('#js-book-search-results-list').on('click', 'a', function () {
