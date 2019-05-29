@@ -12,16 +12,17 @@ function formatQueryParams(params) {
 
 // function to display all of the search results returned in the JSON object
 function displayBookSearchResults(responseJson) {
-    // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
-    $('#js-error-message-text').empty();
+    $('#js-book-search-results').removeClass('hidden');
 
     let printString = '<h2>Search Results</h2>';
     // iterate through the data array
     if (responseJson.numFound == 0) {
         printString += '<p>No results found.</p>';
-        $('#js-book-search-results-list').append(printString);
+        $('#js-book-search-results').append(printString);
+        $('#js-book-search-results-list').addClass("hidden");
     } else {
+        $('#js-book-search-results-list').removeClass('hidden');
         for (let i = 0; i < responseJson.docs.length; i++) {
             if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
                 printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;
@@ -41,8 +42,7 @@ function displayBookSearchResults(responseJson) {
         }
         $('#js-book-search-results-list').append(printString);
     }
-    //display the results section  
-    $('#js-book-search-results').removeClass('hidden');
+
 }
 // function to call search API
 function performBookSearch(searchTitle, searchAuthor) {
@@ -99,7 +99,7 @@ function displayBookDetails(responseJson) {
         bookTitle = responseJson.docs[0].title;
     }
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[0]}-L.jpg`;
-    bookDetailsString += `<img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h2>Book Details</h2><h3> ${bookTitle} </h3><ul class=\"book-details\">`;
+    bookDetailsString += `<h2>Book Details</h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h3>${bookTitle}</h3><ul class=\"book-details\">`;
     if ("author_name" in responseJson.docs[0]) {
         bookDetailsString += `<li>Author(s): ${responseJson.docs[0].author_name}</li>`;
     }
@@ -125,6 +125,7 @@ function displayBookDetails(responseJson) {
 
 function performBackToResults() {
     $('#js-book-search-results').removeClass('hidden');
+    $('#js-book-search-results-list').removeClass('hidden');
 }
 // call appropriate functions based on interactions
 function watchPage() {
@@ -134,7 +135,6 @@ function watchPage() {
         const searchAuthor = $('#js-book-author').val();
         resetPage();
         if (searchTitle != "") {
-            $('#js-book-title-label').removeClass("red");
             performBookSearch(searchTitle, searchAuthor);
         } else {
             $('#js-book-title-label').addClass("red");
@@ -158,7 +158,10 @@ function resetPage() {
     $('#js-book-details').addClass('hidden');
     $('#js-back-to-results').addClass('hidden');
     $('#js-book-search-results').addClass('hidden');
+    $('#js-book-search-results-list').addClass('hidden');
+    $('#js-book-title-label').removeClass("red");
     $('#js-error-message').addClass("hidden");
+    $('#js-error-message-text').empty();
 }
 
 // call the watchPage function after the page is done loading
