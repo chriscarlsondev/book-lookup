@@ -12,8 +12,6 @@ function formatQueryParams(params) {
 
 // function to display all of the search results returned in the JSON object
 function displayBookSearchResults(responseJson) {
-
-    console.log(responseJson);
     responseJson.docs.sort(function (a, b) {
         return b.first_publish_year - a.first_publish_year;
     });
