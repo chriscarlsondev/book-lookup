@@ -87,7 +87,6 @@ form {
   color: white;
   border-radius: 5px;
   margin: 0 auto;
-  width: 100%;
 }
 
 button {
@@ -168,16 +167,28 @@ input {
   padding: 0;
 }
 
+
+.hidden {
+  display: none;
+}
+
 /* Responsive Styling
 ========================================================================== */
-/* Mobile */
+/* Smartphones (portrait and landscape) */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  /* no special styles */
+}
 
-/* Tablet */
-@media screen and (min-width: 768px) {
+/* Tablet (portrait and landscape) */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 
   form {
     display: block;
     clear: both;
+  }
+
+  label {
+    margin: 15px 5px 5px 0x;
   }
 
   .book-cover-large {
@@ -193,9 +204,23 @@ input {
 }
 
 /* Desktop */
-@media screen and (min-width: 1280px) {}
+@media only screen and (min-width : 1224px) {
+  form {
+    display: block;
+    clear: both;
+  }
 
+  label {
+    margin: 15px 5px 5px 0x;
+  }
 
-.hidden {
-  display: none;
+  .book-cover-large {
+    float: right;
+  }
+
+  .book-details {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
 }
