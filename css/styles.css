@@ -59,8 +59,9 @@ section {
 
 footer {
   clear: both;
-  margin: 10px auto;
+  margin: 200px auto 0px auto;
   max-width: 1000px;
+  text-align: center;
 }
 
 .gray {
