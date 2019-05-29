@@ -3,6 +3,7 @@ A simple app to help you look up helpful details about a particular book.
 
 ## Screenshots
 Home Screen
+![Home Screen Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/HomeScreenshot.png)
 
 Book Search Results and Selection Screen
 
@@ -29,6 +30,8 @@ Book Details Screen
 ## Authors
 
 * **Chris Carlson** - ** - Front-end development, testing and styling
+
+
 
 
 
