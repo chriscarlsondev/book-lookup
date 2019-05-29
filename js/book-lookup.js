@@ -30,7 +30,7 @@ function displayBookSearchResults(responseJson) {
                 let lastISBN = responseJson.docs[i].isbn.length - 1;
                 printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[lastISBN]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
                 if (("title" in responseJson.docs[i]) && ("subtitle" in responseJson.docs[i])) {
-                    printString += `<a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
+                    printString += `<a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
                 } else {
                     printString += `<a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
                 }
@@ -99,7 +99,7 @@ function displayBookDetails(responseJson) {
         bookTitle = responseJson.docs[0].title;
     }
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[0]}-L.jpg`;
-    bookDetailsString += `<h2>Book Details</h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h3>${bookTitle}</h3><ul class=\"book-details\">`;
+    bookDetailsString += `<h2>Book Details</h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\" alt=\"Cover of ${bookTitle}\"><h3>${bookTitle}</h3><ul class=\"book-details\">`;
     if ("author_name" in responseJson.docs[0]) {
         bookDetailsString += `<li>Author(s): ${responseJson.docs[0].author_name}</li>`;
     }
