@@ -137,7 +137,7 @@ function watchPage() {
         } else {
             $('#js-book-title-label').addClass("red");
             $('#js-error-message').removeClass("hidden");
-            $('#js-error-message-text').text(`Please enter a title.`);
+            $('#js-error-message-text').text(`Please enter a Book Title.`);
         }
     });
     $('#js-book-search-results-list').on('click', 'a', function () {
