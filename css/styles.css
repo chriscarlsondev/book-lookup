@@ -1,3 +1,6 @@
+/* Normalization
+========================================================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -6,26 +9,93 @@
   display: none;
 }
 
+header {
+  background: #eee;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  background: #fff;
+}
+
+main {
+  clear: both;
+}
+
+form {
+  background: #eee;
+}
+
+section {
+  background: #eee;
+}
+
+.back-to-results {
+  clear: both;
+}
+
+footer {
+  background: #eee;
+  clear: both;
+}
+
+.gray {
+  color: #CCC;
+}
+
+/* Form Elements
+========================================================================== */
+button {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.2em;
+  outline: 0;
+  border: none;
+  background: #CCC;
+  margin: 15px 0 5px 5px;
+  padding: .8em 1em;
+  font-size: 1em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+label {
+  display: inline-block;
+  margin: 15px 5px 5px 5px;
+  font-size: 1em;
+}
+
+input {
+  margin: 0;
+  line-height: 1.2em;
+  padding: .8em 1em;
+  font-size: 1em;
+  background: #fff;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+}
+
+/* Search Results
+========================================================================== */
+
+.book-search-results li {
+  clear: left;
+  padding: .8em 1em;
+}
+
 .book-cover-thumbnail {
   float: left;
-  margin: 5px;
+  margin: 0 10px;
   width: 75px;
   height: 100px;
 }
 
+/* Book Details
+========================================================================== */
+
 .book-cover-large {
   float: right;
   margin: 5px;
-}
-
-#js-book-search-results-list li {
-  clear: left;
-}
-
-form {
-  clear: both;
-}
-
-.results-page-navigation {
-  clear: both;
 }

@@ -33,9 +33,9 @@ function displayBookSearchResults(responseJson) {
                 let lastISBN = responseJson.docs[i].isbn.length - 1;
                 printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[lastISBN]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
                 if (("title" in responseJson.docs[i]) && ("subtitle" in responseJson.docs[i])) {
-                    printString += `Title: <a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
+                    printString += `<a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
                 } else {
-                    printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
+                    printString += `<a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
                 }
                 if ("publish_year" in responseJson.docs[i]) {
                     printString += ' (' + responseJson.docs[i].publish_year[responseJson.docs[i].publish_year.length - 1] + ')<br>';
