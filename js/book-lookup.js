@@ -110,9 +110,6 @@ function displayBookDetails(responseJson) {
         bookDetailsString += `<li>Most Recent Year Published: ${responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1]}</li>`;
 
     }
-    if ("first_publish_year" in responseJson.docs[0]) {
-        bookDetailsString += `<li>First Year Published: ${responseJson.docs[0].first_publish_year}</li>`;
-    }
     if ("isbn" in responseJson.docs[0]) {
         bookDetailsString += `<li>ISBN: ${responseJson.docs[0].isbn[0]}</li>`;
     }
