@@ -2,16 +2,12 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-}
-
 .hidden {
   display: none;
 }
 
 .book-cover-thumbnail {
-  float: right;
+  float: left;
   margin: 5px;
   width: 75px;
   height: 100px;
@@ -22,14 +18,14 @@ body {
   margin: 5px;
 }
 
-.book-details {
-  max-width: 800px;
-}
-
-#js-book-search-results {
-  max-width: 800px;
-}
-
 #js-book-search-results-list li {
-  clear: right;
+  clear: left;
+}
+
+form {
+  clear: both;
+}
+
+.results-page-navigation {
+  clear: both;
 }

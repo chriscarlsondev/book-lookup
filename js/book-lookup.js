@@ -12,9 +12,6 @@ function formatQueryParams(params) {
 
 // function to display all of the search results returned in the JSON object
 function displayBookSearchResults(responseJson) {
-    responseJson.docs.sort(function (a, b) {
-        return b.first_publish_year - a.first_publish_year;
-    });
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
     $('#js-error-message').empty();
@@ -29,31 +26,30 @@ function displayBookSearchResults(responseJson) {
         if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
             printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;
             // if we have a valid ISBN, try to include the book cover
-            printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[0]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+            let lastISBN = responseJson.docs[i].isbn.length - 1;
+            printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[lastISBN]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
             if (("title" in responseJson.docs[i]) && ("subtitle" in responseJson.docs[i])) {
-                printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
+                printString += `Title: <a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
             } else {
                 printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
             }
-            if ("first_publish_year" in responseJson.docs[i]) {
-                printString += ` (${responseJson.docs[i].first_publish_year})<br>`;
+            if ("publish_year" in responseJson.docs[i]) {
+                printString += ' (' + responseJson.docs[i].publish_year[responseJson.docs[i].publish_year.length - 1] + ')<br>';
             }
             printString += '</p></li>';
-            totalValidResults++;
         }
     }
-    let resultsString = `<p>Total of ${totalValidResults} Results Found</p>`;
-    $('#js-book-search-results-list').append(resultsString);
     $('#js-book-search-results-list').append(printString);
     //display the results section  
     $('#js-book-search-results').removeClass('hidden');
-};
+}
 
 // function to call search API
 function performBookSearch(searchTitle, searchAuthor) {
     const params = {
         author: searchAuthor,
-        title: searchTitle
+        title: searchTitle,
+        sort: 'new'
     };
     const queryString = formatQueryParams(params);
     const url = openLibrarySearchURL + '?' + queryString;
@@ -112,6 +108,10 @@ function displayBookDetails(responseJson) {
         bookDetailsString += `Publisher: ${responseJson.docs[0].publisher[0]}<br>`;
     }
     if ("publish_year" in responseJson.docs[0]) {
+        bookDetailsString += `Most Recent Year Published: ${responseJson.docs[0].publish_year[responseJson.docs[0].publish_year.length - 1]}<br>`;
+
+    }
+    if ("first_publish_year" in responseJson.docs[0]) {
         bookDetailsString += `First Year Published: ${responseJson.docs[0].first_publish_year}<br>`;
     }
     if ("isbn" in responseJson.docs[0]) {
