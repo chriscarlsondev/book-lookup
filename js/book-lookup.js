@@ -18,6 +18,8 @@ function displayBookSearchResults(responseJson) {
 
     // make sure that Book Details are hidden
     $('#js-book-details').addClass('hidden');
+    $('#js-back-to-results').addClass('hidden');
+
 
     let totalValidResults = 0;
     let printString = '';
