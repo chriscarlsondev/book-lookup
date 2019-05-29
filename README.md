@@ -1,4 +1,4 @@
-# BOOK LOOKUP
+# BOOK LOOKUP App
 A simple app to help you look up helpful details about a particular book.
 
 ## Built With
