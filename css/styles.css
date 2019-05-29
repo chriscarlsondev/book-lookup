@@ -5,14 +5,10 @@
   box-sizing: border-box;
 }
 
-.hidden {
-  display: none;
-}
 
 header {
   clear: both;
-  margin: 0 auto;
-  padding: 0;
+  margin: 10px auto;
   max-width: 1000px;
 }
 
@@ -111,6 +107,7 @@ label {
   display: inline-block;
   margin: 15px 5px 5px 5px;
   font-size: 1em;
+  background: #fff;
   color: black;
 }
 
@@ -125,7 +122,8 @@ input {
 }
 
 .back-to-results {
-  clear: both;
+  margin: 10px auto;
+  max-width: 1000px;
 }
 
 /* Search Results
@@ -154,7 +152,7 @@ input {
 .book-cover-large {
   margin: 5px;
   width: 200px;
-  float: left;
+  float: right;
 }
 
 .book-details {
@@ -182,9 +180,8 @@ input {
     clear: both;
   }
 
-  .book-details {
-    margin: 0;
-    padding: 0;
+  .book-cover-large {
+    float: right;
   }
 
   .book-details {
@@ -197,3 +194,8 @@ input {
 
 /* Desktop */
 @media screen and (min-width: 1280px) {}
+
+
+.hidden {
+  display: none;
+}

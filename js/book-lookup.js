@@ -16,15 +16,11 @@ function displayBookSearchResults(responseJson) {
     $('#js-book-search-results-list').empty();
     $('#js-error-message-text').empty();
 
-    // make sure that Book Details are hidden
-    $('#js-book-details').addClass('hidden');
-    $('#js-back-to-results').addClass('hidden');
-
-    let totalValidResults = 0;
     let printString = '<h2>Search Results</h2>';
     // iterate through the data array
     if (responseJson.numFound == 0) {
-        $('#js-error-message-text').text('No results found.');
+        printString += '<p>No results found.</p>';
+        $('#js-book-search-results-list').append(printString);
     } else {
         for (let i = 0; i < responseJson.docs.length; i++) {
             if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
@@ -43,8 +39,8 @@ function displayBookSearchResults(responseJson) {
                 printString += '</p></li>';
             }
         }
+        $('#js-book-search-results-list').append(printString);
     }
-    $('#js-book-search-results-list').append(printString);
     //display the results section  
     $('#js-book-search-results').removeClass('hidden');
 }
@@ -103,7 +99,7 @@ function displayBookDetails(responseJson) {
         bookTitle = responseJson.docs[0].title;
     }
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[0]}-L.jpg`;
-    bookDetailsString += `<h2>Book Details</h2><h3> ${bookTitle} </h3><img src=\"${bookCoverURL}\" class=\"book-cover-large\"><ul class=\"book-details\">`;
+    bookDetailsString += `<img src=\"${bookCoverURL}\" class=\"book-cover-large\"><h2>Book Details</h2><h3> ${bookTitle} </h3><ul class=\"book-details\">`;
     if ("author_name" in responseJson.docs[0]) {
         bookDetailsString += `<li>Author(s): ${responseJson.docs[0].author_name}</li>`;
     }
@@ -128,8 +124,6 @@ function displayBookDetails(responseJson) {
 }
 
 function performBackToResults() {
-    $('#js-book-details').addClass('hidden');
-    $('#js-back-to-results').addClass('hidden');
     $('#js-book-search-results').removeClass('hidden');
 }
 // call appropriate functions based on interactions
