@@ -1,2 +1,35 @@
-# book-lookup
-App to lookup the details of a particular book
+# BOOK LOOKUP
+A simple app to help you look up helpful details about a particular book.
+
+## Screenshots
+Home Screen
+
+Book Search Results and Selection Screen
+
+Book Details Screen
+
+## Built With
+
+### Front-End
+* HTML
+* CSS
+* JavaScript
+* JQuery
+
+## Features
+
+* Search for a book using the full title or a portion of the title
+* Narrow down search results by including the author's name	or a portion of the author's name in your search
+* View helpful details about the book including the cover, latest publication date
+
+## Demo
+
+- [Live Demo](https://chriscarlsondev.github.io/book-lookup/)
+
+## Authors
+
+* **Chris Carlson** - ** - Front-end development, testing and styling
+
+
+
+
