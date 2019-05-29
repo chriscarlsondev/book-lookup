@@ -15,14 +15,15 @@ function displayBookSearchResults(responseJson) {
     $('#js-book-search-results-list').empty();
     $('#js-book-search-results').removeClass('hidden');
 
-    let printString = '<h2>Search Results</h2>';
+    let printString = '';
     // iterate through the data array
     if (responseJson.numFound == 0) {
-        printString += '<p>No results found.</p>';
+        printString = '<p>No results found.</p>';
         $('#js-book-search-results').append(printString);
         $('#js-book-search-results-list').addClass("hidden");
     } else {
         $('#js-book-search-results-list').removeClass('hidden');
+        printString += "<p>Click on the title of a book to view additional details.</p>";
         for (let i = 0; i < responseJson.docs.length; i++) {
             if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
                 printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;

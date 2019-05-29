@@ -18,6 +18,11 @@
         <h1><a href="index.html">Book Lookup</a></h1>
     </header>
     <main>
+        <section id="introduction">
+            <h2>Welcome.</h2>
+            <p>Book Lookup is a simple app to help you get more information about a book. Enter the title of a book
+                below to begin.</p>
+        </section>
         <form id="js-search-form" class="search-form">
             <label for="js-book-title" id="js-book-title-label">Book Title:</label>
             <input type="text" name="book-title" id="js-book-title" autofocus required>
@@ -26,12 +31,15 @@
             <button class="form-buttons" id="btn-search" type="button">Search</button>
         </form>
         <section id="js-error-message" class="error-message hidden">
+            <h2>Error</h2>
             <p id="js-error-message-text" class="error-message-text"></p>
         </section>
         <section id="js-book-search-results" class="book-search-results hidden">
+            <h2>Search Results</h2>
             <ol id="js-book-search-results-list" class="book-search-results-list hidden"></ol>
         </section>
         <section class="book-details hidden" id="js-book-details">
+            <h2>Book Details</h2>
         </section>
         <form id="js-back-to-results" class="back-to-results hidden">
             <button class="form-buttons" id="btn-back-to-results" type="button">Back to Search Results</button>
