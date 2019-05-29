@@ -14,38 +14,40 @@ function formatQueryParams(params) {
 function displayBookSearchResults(responseJson) {
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
-    $('#js-error-message').empty();
+    $('#js-error-message-text').empty();
 
     // make sure that Book Details are hidden
     $('#js-book-details').addClass('hidden');
     $('#js-back-to-results').addClass('hidden');
 
-
     let totalValidResults = 0;
     let printString = '';
     // iterate through the data array
-    for (let i = 0; i < responseJson.docs.length; i++) {
-        if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
-            printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;
-            // if we have a valid ISBN, try to include the book cover
-            let lastISBN = responseJson.docs[i].isbn.length - 1;
-            printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[lastISBN]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
-            if (("title" in responseJson.docs[i]) && ("subtitle" in responseJson.docs[i])) {
-                printString += `Title: <a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
-            } else {
-                printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
+    if (responseJson.numFound == 0) {
+        $('#js-error-message-text').text('No results found.');
+    } else {
+        for (let i = 0; i < responseJson.docs.length; i++) {
+            if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
+                printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;
+                // if we have a valid ISBN, try to include the book cover
+                let lastISBN = responseJson.docs[i].isbn.length - 1;
+                printString += `<img src = \"https://covers.openlibrary.org/b/isbn/${responseJson.docs[i].isbn[lastISBN]}-M.jpg\" alt="Cover of ${responseJson.docs[i].title}" class="book-cover-thumbnail">`;
+                if (("title" in responseJson.docs[i]) && ("subtitle" in responseJson.docs[i])) {
+                    printString += `Title: <a href=\"#\" id=\"` + lastISBN + `\">${responseJson.docs[i].title}: ${responseJson.docs[i].subtitle}</a>`;
+                } else {
+                    printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
+                }
+                if ("publish_year" in responseJson.docs[i]) {
+                    printString += ' (' + responseJson.docs[i].publish_year[responseJson.docs[i].publish_year.length - 1] + ')<br>';
+                }
+                printString += '</p></li>';
             }
-            if ("publish_year" in responseJson.docs[i]) {
-                printString += ' (' + responseJson.docs[i].publish_year[responseJson.docs[i].publish_year.length - 1] + ')<br>';
-            }
-            printString += '</p></li>';
         }
     }
     $('#js-book-search-results-list').append(printString);
     //display the results section  
     $('#js-book-search-results').removeClass('hidden');
 }
-
 // function to call search API
 function performBookSearch(searchTitle, searchAuthor) {
     const params = {
@@ -65,7 +67,7 @@ function performBookSearch(searchTitle, searchAuthor) {
         })
         .then(responseJson => displayBookSearchResults(responseJson))
         .catch(err => {
-            $('#js-error-message').text(`Error: ${err}`);
+            $('#js-error-message-text').text(`Error: ${err}`);
         });
 }
 
@@ -85,7 +87,7 @@ function getBookDetails(ISBN) {
         })
         .then(responseJson => displayBookDetails(responseJson))
         .catch(err => {
-            $('#js-error-message').text(`Error: ${err}`);
+            $('#js-error-message-text').text(`Error: ${err}`);
         });
 }
 

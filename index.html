@@ -16,7 +16,6 @@
         <h1><a href="index.html">Book Lookup</a></h1>
     </header>
     <main>
-        <p id="js-error-message" class="error-message"></p>
         <form id="js-search-form">
             <label for="book-title">Book Title*</label>
             <input type="text" name="book-title" id="js-book-title" required>
@@ -24,9 +23,11 @@
             <input type="text" name="book-author" id="js-book-author">
             <button class="form-buttons" id="btn-search" type="button">Search</button>
         </form>
+        <section id="js-error-message">
+            <p id="js-error-message-text" class="error-message"></p>
+        </section>
         <section id="js-book-search-results" class="hidden">
-            <ol id="js-book-search-results-list">
-            </ol>
+            <ol id="js-book-search-results-list"></ol>
         </section>
         <section class="book-details" id="js-book-details" class="hidden">
         </section>
