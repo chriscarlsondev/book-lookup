@@ -182,11 +182,16 @@ input {
 ========================================================================== */
 /* Smartphones (portrait and landscape) */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  /* no special styles */
+  /* no special styles - keep defaults */
 }
 
-/* Tablet (portrait and landscape) */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Table (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  /* no special styles - keep defaults */
+}
+
+/* Table (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 
   form {
     display: block;
@@ -206,7 +211,6 @@ input {
     margin: 0;
     padding: 0;
   }
-
 }
 
 /* Desktop */
