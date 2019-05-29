@@ -49,7 +49,8 @@ function performBookSearch(searchTitle, searchAuthor) {
     const params = {
         author: searchAuthor,
         title: searchTitle,
-        sort: 'new'
+        sort: 'new',
+        lang: 'eng'
     };
     const queryString = formatQueryParams(params);
     const url = openLibrarySearchURL + '?' + queryString;
