@@ -12,6 +12,11 @@ function formatQueryParams(params) {
 
 // function to display all of the search results returned in the JSON object
 function displayBookSearchResults(responseJson) {
+
+    console.log(responseJson);
+    responseJson.docs.sort(function (a, b) {
+        return b.first_publish_year - a.first_publish_year;
+    });
     // if there are previous results, remove them
     $('#js-book-search-results-list').empty();
     $('#js-error-message').empty();
@@ -32,8 +37,8 @@ function displayBookSearchResults(responseJson) {
             } else {
                 printString += `Title: <a href=\"#\" id=\"` + `${responseJson.docs[i].isbn[0]}` + `\">${responseJson.docs[i].title}</a>`;
             }
-            if ("publish_year" in responseJson.docs[i]) {
-                printString += ` (${responseJson.docs[i].publish_year[0]})<br>`;
+            if ("first_publish_year" in responseJson.docs[i]) {
+                printString += ` (${responseJson.docs[i].first_publish_year})<br>`;
             }
             printString += '</p></li>';
             totalValidResults++;
@@ -109,7 +114,7 @@ function displayBookDetails(responseJson) {
         bookDetailsString += `Publisher: ${responseJson.docs[0].publisher[0]}<br>`;
     }
     if ("publish_year" in responseJson.docs[0]) {
-        bookDetailsString += `Year Published: ${responseJson.docs[0].publish_year[0]}<br>`;
+        bookDetailsString += `First Year Published: ${responseJson.docs[0].first_publish_year}<br>`;
     }
     if ("isbn" in responseJson.docs[0]) {
         bookDetailsString += `ISBN: ${responseJson.docs[0].isbn[0]}<br>`;
