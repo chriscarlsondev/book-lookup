@@ -18,11 +18,11 @@ function displayBookSearchResults(responseJson) {
     let printString = '';
     // iterate through the data array
     if (responseJson.numFound == 0) {
-        printString = '<p>No results found.</p>';
-        $('#js-book-search-results').append(printString);
+        $('#js-book-search-no-results').removeClass("hidden");
         $('#js-book-search-results-list').addClass("hidden");
     } else {
         $('#js-book-search-results-list').removeClass('hidden');
+        $('#js-book-search-no-results').addClass("hidden");
         for (let i = 0; i < responseJson.docs.length; i++) {
             if (("title" in responseJson.docs[i]) && ("isbn" in responseJson.docs[i])) {
                 printString += `<li id=\"${responseJson.docs[i].isbn[0]}\"><p class="search-results-book-details">`;
@@ -99,7 +99,7 @@ function displayBookDetails(responseJson) {
         bookTitle = responseJson.docs[0].title;
     }
     let bookCoverURL = `https://covers.openlibrary.org/b/isbn/${responseJson.docs[0].isbn[0]}-L.jpg`;
-    bookDetailsString += `<h2>Book Details</h2><img src=\"${bookCoverURL}\" class=\"book-cover-large\" alt=\"Cover of ${bookTitle}\"><h3>${bookTitle}</h3><ul class=\"book-details\">`;
+    bookDetailsString += `<img src=\"${bookCoverURL}\" class=\"book-cover-large\" alt=\"Cover of ${bookTitle}\"><h3>${bookTitle}</h3><ul class=\"book-details\">`;
     if ("author_name" in responseJson.docs[0]) {
         bookDetailsString += `<li>Author(s): ${responseJson.docs[0].author_name}</li>`;
     }
@@ -129,6 +129,7 @@ function performBackToResults() {
 }
 // call appropriate functions based on interactions
 function watchPage() {
+    resetPage();
     $('#btn-search').click(event => {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
