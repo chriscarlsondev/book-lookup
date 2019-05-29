@@ -25,19 +25,10 @@ body {
   max-width: 800px;
 }
 
-.related-videos {
-  max-width: 800px;
-  clear: both;
-}
-
 #js-book-search-results {
   max-width: 800px;
 }
 
 #js-book-search-results-list li {
   clear: right;
-}
-
-.related-video {
-  float: left;
 }
