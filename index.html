@@ -28,19 +28,21 @@
             <input type="text" name="book-author" id="js-book-author">
             <button id="btn-search" class="form-buttons" type="button">Search</button>
         </form>
-        <section id="js-error-message" class="error-message hidden" aria-label="Error Message">
+        <section id="js-error-message" class="error-message hidden" aria-live="assertive" aria-label="Error Message">
             <h2>Error</h2>
             <p id="js-error-message-text" class="error-message-text"></p>
         </section>
-        <section id="js-book-search-results" class="book-search-results hidden" aria-label="Search Results">
+        <section id="js-book-search-results" class="book-search-results hidden" aria-live="polite"
+            aria-label="Search Results">
             <h2>Search Results</h2>
             <ol id="js-book-search-results-list" class="book-search-results-list hidden"></ol>
             <p id="js-book-search-no-results" class="book-search-no-results">No results found.</p>
         </section>
-        <section id="js-book-details" class="book-details hidden" aria-label="Book Details">
+        <section id="js-book-details" class="book-details hidden" aria-live="polite" aria-label="Book Details">
             <h2>Book Details</h2>
         </section>
-        <form id="js-back-to-results" class="back-to-results hidden" aria-label="Return to Search Results">
+        <form id="js-back-to-results" class="back-to-results hidden" aria-live="polite"
+            aria-label="Return to Search Results">
             <button id="btn-back-to-results" class="form-buttons" type="button">Back to Search Results</button>
         </form>
     </main>
