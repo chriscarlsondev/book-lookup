@@ -18,10 +18,9 @@ Book Details Screen
 
 ## Features
 
-* Create a list of books
-* Add your favorite books
-* Like lists to get recommendations
-* See every book currently in the library
+* Search for a book using the full title or a portion of the title
+* Narrow down search results by including the author's name	or a portion of the author's name in your search
+* View helpful details about the book including the cover, latest publication date
 
 ## Demo
 
