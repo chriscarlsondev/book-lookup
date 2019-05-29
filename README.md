@@ -1,19 +1,9 @@
 # BOOK LOOKUP
 A simple app to help you look up helpful details about a particular book.
 
-## Screenshots
-###Home Screen
-![Home Screen Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/HomeScreenshot.png)
-
-Book Search Results and Selection Screen
-![Book Search Results and Selection Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/SearchResultsScreenshot.png)
-
-Book Details Screen
-![Book Details Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/BookDetailsScreenshot.png)
-
 ## Built With
 
-### Front-End
+### Front-End Technologies
 * HTML
 * CSS
 * JavaScript
@@ -28,6 +18,17 @@ Book Details Screen
 ## Demo
 
 - [Live Demo](https://chriscarlsondev.github.io/book-lookup/)
+
+## Screenshots
+
+### Home Screen
+![Home Screen Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/HomeScreenshot.png)
+
+### Book Search Results and Selection Screen
+![Book Search Results and Selection Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/SearchResultsScreenshot.png)
+
+### Book Details Screen
+![Book Details Screenshot](https://github.com/chriscarlsondev/book-lookup/blob/master/images/BookDetailsScreenshot.png)
 
 ## Authors
 
