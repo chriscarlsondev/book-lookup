@@ -23,25 +23,25 @@
             <p>Book Lookup is a simple app to help you get more information about a book. Enter the title of a book
                 below to begin.</p>
         </section>
-        <form id="js-search-form" class="search-form">
+        <form id="js-search-form" class="search-form" aria-label="Search">
             <label for="js-book-title" id="js-book-title-label">Book Title:</label>
             <input type="text" name="book-title" id="js-book-title" autofocus required>
             <label for="js-book-author">Book Author: <span class="gray">(optional)</span></label>
             <input type="text" name="book-author" id="js-book-author">
             <button class="form-buttons" id="btn-search" type="button">Search</button>
         </form>
-        <section id="js-error-message" class="error-message hidden">
+        <section id="js-error-message" class="error-message hidden" aria-label="Error Message">
             <h2>Error</h2>
             <p id="js-error-message-text" class="error-message-text"></p>
         </section>
-        <section id="js-book-search-results" class="book-search-results hidden">
+        <section id="js-book-search-results" class="book-search-results hidden" aria-label="Search Results">
             <h2>Search Results</h2>
             <ol id="js-book-search-results-list" class="book-search-results-list hidden"></ol>
         </section>
-        <section class="book-details hidden" id="js-book-details">
+        <section class="book-details hidden" id="js-book-details" aria-label="Book Details">
             <h2>Book Details</h2>
         </section>
-        <form id="js-back-to-results" class="back-to-results hidden">
+        <form id="js-back-to-results" class="back-to-results hidden" aria-label="Return to Search Results">
             <button class="form-buttons" id="btn-back-to-results" type="button">Back to Search Results</button>
         </form>
     </main>
