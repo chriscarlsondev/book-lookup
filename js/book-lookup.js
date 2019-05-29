@@ -92,8 +92,6 @@ function getBookDetails(ISBN) {
 }
 
 function displayBookDetails(responseJson) {
-    // hide search results section
-    $('#js-book-search-results').addClass('hidden');
     // if there are previous book details displayed, remove them
     $('#js-book-details').empty();
     let bookDetailsString = '';
@@ -140,22 +138,33 @@ function watchPage() {
         event.preventDefault();
         const searchTitle = $('#js-book-title').val();
         const searchAuthor = $('#js-book-author').val();
+        resetPage();
         if (searchTitle != "") {
             $('#js-book-title-label').removeClass("red");
             performBookSearch(searchTitle, searchAuthor);
         } else {
             $('#js-book-title-label').addClass("red");
+            $('#js-error-message').removeClass("hidden");
             $('#js-error-message-text').text(`Please enter a title.`);
         }
     });
     $('#js-book-search-results-list').on('click', 'a', function () {
         event.preventDefault();
+        resetPage();
         getBookDetails($(this).attr('id'));
     });
     $('#btn-back-to-results').click(event => {
         event.preventDefault();
+        resetPage();
         performBackToResults();
     });
+}
+
+function resetPage() {
+    $('#js-book-details').addClass('hidden');
+    $('#js-back-to-results').addClass('hidden');
+    $('#js-book-search-results').addClass('hidden');
+    $('#js-error-message').addClass("hidden");
 }
 
 // call the watchPage function after the page is done loading
