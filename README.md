@@ -32,7 +32,7 @@ A simple app to help you look up helpful details about a particular book.
 
 ## Authors
 
-* **Chris Carlson** - ** - Front-end development, testing and styling
+* **Chris Carlson** - Front-end development, testing and styling
 
 
 
